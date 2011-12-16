@@ -3,7 +3,8 @@
 namespace ObjectValidator\Mapping;
 
 use ObjectValidator\Mapping\AbstractMemberMetadata,
-    InvalidArgumentException;
+    InvalidArgumentException,
+    ReflectionProperty;
 
 class PropertyMetadata extends AbstractMemberMetadata
 {
@@ -21,7 +22,7 @@ class PropertyMetadata extends AbstractMemberMetadata
 
     public function newReflectionMember()
     {
-        $member = new \ReflectionProperty($this->getClassName(), $this->getName());
+        $member = new ReflectionProperty($this->getClassName(), $this->getName());
         $member->setAccessible(true);
 
         return $member;
