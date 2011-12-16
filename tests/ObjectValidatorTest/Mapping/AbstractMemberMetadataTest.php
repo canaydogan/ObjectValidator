@@ -12,6 +12,7 @@ class AbstractMemberMetadataTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
         $annotatedClass = $this->getAnnotatedClass();
         $reflectionClass = new ReflectionClass($annotatedClass);
         $properties = $reflectionClass->getProperties();
