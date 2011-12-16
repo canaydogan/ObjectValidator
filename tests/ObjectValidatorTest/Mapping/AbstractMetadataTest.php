@@ -10,7 +10,9 @@ class AbstractMetadataTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->_abstractMetadata = $this->getMockForAbstractClass('ObjectValidator\Mapping\AbstractMetadata');
+        $this->_abstractMetadata = $this->getMockForAbstractClass(
+            'ObjectValidator\Mapping\AbstractMetadata'
+        );
     }
 
     public function testAddValidator()
