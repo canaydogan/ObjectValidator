@@ -3,7 +3,9 @@
 namespace ObjectValidatorTest\Framework;
 
 use Zend\Validator\NotEmpty,
-    ObjectValidatorTest\Assets\Classes\AnnotatedClass;
+    ObjectValidatorTest\Assets\Classes\AnnotatedClass,
+    Doctrine\Common\Annotations\AnnotationReader,
+    ObjectValidator\Mapping\ClassMetadata;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -18,6 +20,22 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $annotatedClass = new AnnotatedClass();
 
         return $annotatedClass;
+    }
+
+    public function getAnnotationReader()
+    {
+        $annotationReader = new AnnotationReader();
+
+        return $annotationReader;
+    }
+
+    public function getAnnotatedClassMetadata()
+    {
+        $annotatedClass = $this->getAnnotatedClass();
+        $className = get_class($annotatedClass);
+        $classMetadata = new ClassMetadata($className);
+
+        return $classMetadata;
     }
 
 }

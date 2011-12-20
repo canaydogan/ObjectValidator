@@ -2,11 +2,11 @@
 
 namespace ObjectValidator\Mapping;
 
-use ObjectValidator\Mapping\AbstractMetadata;
+use ObjectValidator\Mapping\ClassMetadata;
 
 interface Loader
 {
 
-    public function loadClassMetadata(AbstractMetadata $metadata);
+    public function loadClassMetadata(ClassMetadata $metadata);
 
 }

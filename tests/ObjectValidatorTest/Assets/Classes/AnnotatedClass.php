@@ -2,25 +2,29 @@
 
 namespace ObjectValidatorTest\Assets\Classes;
 
-use Zend\Validator AS Zend;
+use ObjectValidator\Validator AS Validator;
 
+/**
+ * @Validator\NotEmpty()
+ */
 class AnnotatedClass
 {
 
     /**
-     * @Zend\NotEmpty()
+     * @Validator\NotEmpty()
      * @var string
      */
     protected $_name;
 
     /**
-     * @Zend\EmailAddress()
+     * @Validator\NotEmpty()
+     * @Validator\EmailAddress()
      * @var string
      */
     public $email;
 
     /**
-     * @Zend\StringLength({min: 4, max: 16})
+     * @Validator\StringLength(options = {"min" = 4, "max" = 16})
      * @var string
      */
     private $_password;
@@ -31,7 +35,7 @@ class AnnotatedClass
     public $confirmPassword;
 
     /**
-     * @Zend\NotEmpty()
+     * @Validator\NotEmpty()
      * @return bool
      */
     public function isPasswordConfirmed()
