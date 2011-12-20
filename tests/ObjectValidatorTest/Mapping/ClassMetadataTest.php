@@ -34,9 +34,9 @@ class ClassMetadataTest extends TestCase
 
         $_memberMetadata = $this->_classMetadata->getMemberMetadatas($propertyName);
         $this->assertEquals(1, count($_memberMetadata));
-        $this->assertEquals(
-            $memberMetadata->getName(),
-            $_memberMetadata[0]->getName()
+        $this->assertSame(
+            $memberMetadata,
+            $_memberMetadata[0]
         );
     }
 
