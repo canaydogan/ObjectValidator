@@ -6,7 +6,8 @@ use Zend\Validator\NotEmpty,
     ObjectValidatorTest\Assets\Classes\AnnotatedClass,
     Doctrine\Common\Annotations\AnnotationReader,
     ObjectValidator\Mapping\ClassMetadata,
-    ObjectValidator\Mapping\Loader\AnnotationLoader;
+    ObjectValidator\Mapping\Loader\AnnotationLoader,
+    ObjectValidator\Mapping\ClassMetadataFactory\Standard;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -44,6 +45,24 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $classMetadata = new ClassMetadata($className);
 
         return $classMetadata;
+    }
+
+    public function getStandardClassMetadataFactory()
+    {
+        $classMetadataFactory = new Standard($this->getAnnotationLoader());
+
+        return $classMetadataFactory;
+    }
+
+    public function getAnnotatedClassWithValidValues()
+    {
+        $annotatedClass = $this->getAnnotatedClass();
+        $annotatedClass->setName('Can Aydogan');
+        $annotatedClass->setEmail('canaydogan89@gmail.com');
+        $annotatedClass->setPassword('12345');
+        $annotatedClass->setConfirmPassword('12345');
+
+        return $annotatedClass;
     }
 
 }

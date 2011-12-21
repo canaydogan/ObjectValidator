@@ -24,7 +24,7 @@ class AnnotatedClass
     public $email;
 
     /**
-     * @Validator\StringLength(options = {"min" = 4, "max" = 16})
+     * @Validator\StringLength(min = 4, max = 8)
      * @var string
      */
     private $_password;
