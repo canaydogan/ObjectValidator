@@ -118,5 +118,26 @@ class ObjectValidatorTest extends TestCase
         $this->assertEquals(1, count($messages['isPasswordConfirmed']));
     }
 
+    public function testIsValidWithLocator()
+    {
+        $validObject = $this->getAnnotatedClassWithValidValues();
+
+        $validator = $this->getLocator()->get('object_validator');
+        $this->assertTrue($validator->isValid($validObject));
+        $this->assertEquals(0, count($validator->getMessages()));
+    }
+
+    public function testIsValidForLocatorCache()
+    {
+        $validObject = $this->getAnnotatedClassWithValidValues();
+
+        $validator = $this->getLocator()->get('object_validator');
+        $cache = $this->getLocator()->get('object_validator_cache');
+
+        $this->assertTrue($validator->isValid($validObject));
+
+        $this->assertTrue($cache->contains(get_class($validObject)));
+    }
+
 
 }

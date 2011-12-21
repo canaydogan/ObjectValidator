@@ -67,7 +67,7 @@ abstract class AbstractStandard extends TestCase
         $this->assertTrue($arrayCache->contains($className));
 
         $this->_standard = new Standard($this->getLoader(), $arrayCache);
-        $cachedClassMetadata = $this->_standard->getClassMetadata($className);
+        $cachedClassMetadata = $this->_standard->getCache()->fetch($className);
         $this->assertSame($classMetadata, $cachedClassMetadata);
     }
 

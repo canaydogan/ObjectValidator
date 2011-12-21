@@ -12,6 +12,8 @@ use Zend\Validator\NotEmpty,
 class TestCase extends \PHPUnit_Framework_TestCase
 {
 
+    public static $locator;
+
     public function getNotEmptyValidator()
     {
         return new NotEmpty();
@@ -63,6 +65,16 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $annotatedClass->setConfirmPassword('12345');
 
         return $annotatedClass;
+    }
+
+    public static function setLocator($locator)
+    {
+        self::$locator = $locator;
+    }
+
+    public static function getLocator()
+    {
+        return self::$locator;
     }
 
 }

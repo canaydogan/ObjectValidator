@@ -40,3 +40,5 @@ $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
 
 $config = new \Zend\Di\Configuration($config['di']);
 $config->configure($di);
+
+\ObjectValidatorTest\Framework\TestCase::$locator = $di;
