@@ -18,22 +18,31 @@ $path = array(
 set_include_path(implode(PATH_SEPARATOR, $path));
 
 require_once 'Zend/Loader/AutoloaderFactory.php';
-\Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => array()));
+Zend\Loader\AutoloaderFactory::factory(array('Zend\Loader\StandardAutoloader' => array(
+    'namespaces' => array(
+        'ObjectValidatorTest' => $testsPath . '/ObjectValidatorTest'
+    )
+)));
 
-$moduleLoader = new \Zend\Loader\ModuleAutoloader(array(
-    realpath(__DIR__ . '/../..'),
-    SPIFFY_DOCTRINE_PATH
+$listenerOptions  = new Zend\Module\Listener\ListenerOptions(array(
+    'module_paths' => array(
+        realpath(__DIR__ . '/../..'),
+        SPIFFY_DOCTRINE_PATH,
+    )
 ));
-$moduleLoader->register();
 
-$moduleManager = new \Zend\Module\Manager(array(
+$defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
+
+$moduleManager = new Zend\Module\Manager(array(
     'SpiffyDoctrine',
+    'SpiffyDoctrineORM',
     'ObjectValidator'
 ));
-$moduleManager->loadModule('SpiffyDoctrine');
-$moduleManager->loadModule('ObjectValidator');
+$moduleManager->events()->attachAggregate($defaultListeners);
+$moduleManager->loadModules();
 
-$config = $moduleManager->getMergedConfig()->toArray();
+$config = $moduleManager->getEvent()->getConfigListener()->getMergedConfig()->toArray();
+
 
 $di = new \Zend\Di\Di;
 $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
